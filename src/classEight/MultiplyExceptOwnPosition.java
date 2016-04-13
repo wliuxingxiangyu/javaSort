@@ -1,6 +1,6 @@
 package classEight;
 
-public class MultiplyExceptOwnPosition{
+public class MultiplyExceptOwnPosition{//¿€≥À£¨ È381.
 
 	public static int[] muliplyAllExceptOwnNoDivision(int[] arr){
 		if(arr.length==1){

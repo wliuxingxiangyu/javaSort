@@ -80,8 +80,6 @@ public class MinPathValue {
 		return result;
 	}
 
-	public static int[][] matrix2 = { { 1, 3, 2, 1 }, { 0, 5, 1, 9 },
-			{ 8, 0, 0, 7 }, { 6, 7, 1, 3 } };
 
 	public static void printMatrix(int[][] matrix) { // ¥Ú”°æÿ’Û
 		for (int i = 0; i != matrix.length; i++) {
@@ -99,10 +97,9 @@ public class MinPathValue {
 		System.out.println();
 	}
 
-
-
 	public static void main(String[] args) {
-
+		int[][] matrix2 = { { 1, 3, 2, 1 }, { 0, 5, 1, 9 },
+				{ 8, 0, 0, 7 }, { 6, 7, 1, 3 } };
 		// int[][] matrix = generateMatrix(4, 4);
 		printMatrix(matrix2);
 		System.out.println("getMinPathValueSum="+ getMinPathValueSum(matrix2));

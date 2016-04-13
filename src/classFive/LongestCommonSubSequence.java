@@ -14,20 +14,22 @@ public class LongestCommonSubSequence {
 
 	public static int[][] generateDPMap(char[] chars1, char[] chars2) {
 		int[][] dpMap = new int[chars1.length][chars2.length];
-		dpMap[0][0] = chars1[0] == chars2[0] ? 1 : 0;
-		for (int i = 1; i != chars1.length; i++) {
-			dpMap[i][0] = Math.max(dpMap[i - 1][0], chars1[i] == chars2[0] ? 1
-					: 0);
+		dpMap[0][0] = chars1[0] == chars2[0] ? 1 : 0;//dpMap[0][0]无上无左,单独赋值
+		for (int i = 1; i != chars1.length; i++) {//对dpMap[i][0]第0列赋值
+			dpMap[i][0]=Math.max(dpMap[i-1][0],chars1[i]==chars2[0] ? 1: 0);
 		}
-		for (int i = 1; i != chars2.length; i++) {
-			dpMap[0][i] = Math.max(dpMap[0][i - 1], chars2[i] == chars1[0] ? 1
-					: 0);
+		for (int j = 1; j != chars2.length; j++) {//对dpMap[0][j]第0行赋值
+			dpMap[0][j]=Math.max(dpMap[0][j-1],chars2[j]==chars1[0] ? 1: 0);
 		}
 		for (int i = 1; i != chars1.length; i++) {
 			for (int j = 1; j != chars2.length; j++) {
 				int tmp = Math.max(dpMap[i - 1][j], dpMap[i][j - 1]);
-				dpMap[i][j] = chars1[i] == chars2[j] ? Math.max(
-						dpMap[i - 1][j - 1] + 1, tmp) : tmp;
+				if (chars1[i] != chars2[j]) {//不同时,max(从左边,从上边)
+					dpMap[i][j] =tmp;
+				}else{//相同时,max(从 左上角+1,tmp)。。加1是因为两串都要算上相同的元素.
+					dpMap[i][j] = Math.max(dpMap[i - 1][j - 1] + 1, tmp);
+				}
+				
 			}
 		}
 		return dpMap;
@@ -85,8 +87,15 @@ public class LongestCommonSubSequence {
 	}
 
 	public static void main(String[] args) {
-		String A = "1A2C3D4B56";
-		String B = "B1D23CA45B6A";
+		String A = "cabbeaf";
+		char[] cArr=A.toCharArray();
+		String B = null ;
+		for (int i = A.length()-1; i >=0 ; i--) {
+			B += cArr[i];
+		}
+		
+//		String A = "1A2C3D4B56";
+//		String B = "B1D23CA45B6A";
 		System.out.println("LCSubsequence: " + getLCSubSequence(A, B));
 		System.out.println("Length: " + getLCSubSequenceLength(A, B));
 

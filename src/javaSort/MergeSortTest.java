@@ -15,19 +15,24 @@ public class MergeSortTest {
 	public static void merge_sort_recursive(int[] arr, int[] reg, int start, int end) {
 		if (start >= end)
 			return;
-		int len = end - start, mid = (len >> 1) + start;
-		int start1 = start, end1 = mid;
-		int start2 = mid + 1, end2 = end;
-		merge_sort_recursive(arr, reg, start1, end1);
-		merge_sort_recursive(arr, reg, start2, end2);
+		int mid = ((end - start) >> 1) + start;//即(start+end)/2
+		//归并排序的3步,2步递归,1步合并。
+		merge_sort_recursive(arr, reg, start, mid);//start~mid
+		merge_sort_recursive(arr, reg, mid + 1, end);//mid + 1~end
+		merge(arr,reg,start,mid,end);
+	}
+	
+	public static void merge(int[] arr, int[] reg, int start,int mid, int end) {
 		int k = start;
+		int i1 = start, end1 = mid;//前部分 合并入 reg
+		int i2 = mid + 1, end2 = end;//后部分 合并入 reg
 		// 拆开的原数组arr 合并入 临时数组reg
-		while (start1 <= end1 && start2 <= end2)
-			reg[k++] = arr[start1] < arr[start2] ? arr[start1++] : arr[start2++];
-		while (start1 <= end1)
-			reg[k++] = arr[start1++];
-		while (start2 <= end2)
-			reg[k++] = arr[start2++];
+		while (i1 <= end1 && i2 <= end2)
+			reg[k++] = arr[i1] < arr[i2] ? arr[i1++] : arr[i2++];
+		while (i1 <= end1)//前半部分的剩余
+			reg[k++] = arr[i1++];
+		while (i2 <= end2)//后半部分的剩余
+			reg[k++] = arr[i2++];
 		for (k = start; k <= end; k++)//临时数组reg 返回给  原数组arr
 			arr[k] = reg[k];
 	}
@@ -36,7 +41,7 @@ public class MergeSortTest {
 		int[] arr={2,9,6,8,5,4};
 		System.out.println("前");
 		PrintArr(arr);
-		int[] reg=new int[arr.length];
+		int[] reg=new int[arr.length];//临时数组reg
 		merge_sort_recursive(arr,reg,0,arr.length-1);
 		System.out.println("hou");
 		PrintArr(arr);
