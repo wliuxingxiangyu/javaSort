@@ -2,7 +2,7 @@ package classFive;
 
 import java.util.HashMap;
 
-public class FindTrueOrFalse{
+public class FindTrueOrFalse{//L5P2
 
 	public static int getDesiredResultWays(String exp,boolean desired){
 		if(exp==null||exp.equals("")){
@@ -33,10 +33,11 @@ public class FindTrueOrFalse{
 		return true;
 	}
 
+	//desired结果的  start~end的组合。record记忆化搜索.
 	public static int computeProcess(char[] exp,boolean desired,int start,
-			int end,HashMap<String,Integer> record){//desired结果的  start~end的组合。record记忆化搜索
-		String key=desired+"+"+start+"+"+end;
-		if(record.containsKey(key)){//有就查map
+			int end,HashMap<String,Integer> record){
+		String key=desired+"+"+start+"+"+end;//合并字符串。
+		if(record.containsKey(key)){//一开始就查map,有就返回,省去再次计算。
 			return record.get(key);
 		}
 		if(start==end){//只有0或1

@@ -1,6 +1,6 @@
 package classFive;
 
-public class PrintStringCombination{
+public class PrintStringCombination{//L5P5
 	public static void printAllCombination(String str){
 		char[] charArr=str.toCharArray();// 转化string为char类型数组，在递归时省空间。
 		printAllProcess(charArr,0,""); // 递归函数开始

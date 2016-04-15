@@ -1,6 +1,6 @@
 package classFive;
 
-public class NQueensProblem{
+public class NQueensProblem{//L5P1
 
 	public static int getNQueensNum(int numbers){
 		if(numbers<1){
@@ -51,7 +51,8 @@ public class NQueensProblem{
 		}
 		int pos=0;
 		int mostRightOne=0;
-		pos=upperLim&(~(colLim|leftDiaLim|rightDiaLim));//列限制,左对角线限制,右对角线限制
+		//列限制为colLim=1,左对角线限制为leftDiaLim=1,右对角线限制为rightDiaLim=1,或后取反,能放的位置为pos.
+		pos=upperLim&(~(colLim|leftDiaLim|rightDiaLim));//递归传3个限制。upperLim未变限制32位,9不能放.
 		int result=0;
 		while(pos!=0){//所有为0退出
 			mostRightOne=pos&(~pos+1);//找末尾的1

@@ -1,6 +1,6 @@
 package classFive;
 
-public class PrintAllPermutations{
+public class PrintAllPermutations{//L5P3
 
 	public static void printAllPermutations(String str){
 		if(str==null||str.equals("")||str.length()==1){
@@ -35,5 +35,8 @@ public class PrintAllPermutations{
 	public static void main(String[] args){
 		String str="abcd";
 		printAllPermutations(str);
+		System.out.println("-----");
+		String str2="aab";
+		printAllPermutations(str2);
 	}
 }
