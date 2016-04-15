@@ -118,10 +118,14 @@ public class TransFromBetweenTwoWordsMore {
 	}
 
 	public static void main(String[] args) {
-		String[] book = new String[] { "AAA", "AAC", "CAC", "CCC", "DCC",
-				"DDC", "DDD" };
-		String from = "AAA";
-		String to = "DDD";
+//		String[] book = new String[] { "AAA", "AAC", "CAC", "CCC", "DCC",
+//				"DDC", "DDD" };
+//		String from = "AAA";
+//		String to = "DDD";
+		//-----
+		String[] book=new String[]{"hot","dot","dog","lot","log"};
+		String from="hit";
+		String to="cog";
 		String[] result = findTransPathByBFS(book, from, to);
 		if (result != null) {
 			for (String str : result) {
