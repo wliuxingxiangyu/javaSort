@@ -22,10 +22,11 @@ public class PrintStringCombination{//L5P5
 		String traceAddCurrentChar=trace+String.valueOf(charArr[currentIndex]);
 		// 打印与当前字符结合后的字符串
 		System.out.println(traceAddCurrentChar);
+		
 		//每次两条路：“包”或“不包”当前字符
 		// 走递归的过程中“包”含当前字符的分支(让traceAddCurrentChar往下传值)
 		printAllProcess(charArr,currentIndex+1,traceAddCurrentChar);
-		// 走递归的过程中“不包”含当前字符的分支(让trace往下传值)
+		// 走递归的过程中“不包”含当前字符的分支(让trace往下传值)//如：不包含B。
 		printAllProcess(charArr,currentIndex+1,trace);
 	}
 
@@ -37,7 +38,7 @@ public class PrintStringCombination{//L5P5
 
 	public static void printKLengthProcess(char[] charArr,int currentIndex,
 			String trace,int K){
-		if(trace.length()==K){ // 剪枝条件A
+		if(trace.length()==K){ // 剪枝条件A,前面的已经到K了，
 			return;
 		}
 		if(trace.length()+charArr.length-currentIndex<K){ // 剪枝条件B：不足K

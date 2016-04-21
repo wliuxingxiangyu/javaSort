@@ -37,8 +37,8 @@ public class TransFromBetweenTwoWords{//L5P6
 				char tmp=fromChars[i];//取出fromChars[i]备份
 				fromChars[i]=toChars[i];
 				String from=String.valueOf(fromChars);
+				System.out.println("wordMap是否含="+ from);
 				if(wordMap.contains(from)){
-					System.out.println("wordMap.contains(from)="+ from);
 					path.addLast(from);//addLast为LinkedList方法.先将from加入path进行往深度探索.
 					if(findProcess(fromChars,toChars,path,wordMap)){//fromChars变了进递归
 						return true;//变成功了

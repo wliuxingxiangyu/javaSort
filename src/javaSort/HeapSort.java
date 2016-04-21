@@ -5,15 +5,17 @@ public class HeapSort {
 			17, 34, 11 };
 
 	public static void main(String[] args) {
-		buildMaxHeapify(sort);
+		printArray(sort);
+		System.out.println("即将堆排序。。");
+		buildMaxHeapify(sort);//建大根堆
 		heapSort(sort);
-		print(sort);
+		printHeap(sort);
 	}
 
 	private static void buildMaxHeapify(int[] data) {
-		// 没有子节点的才需要创建最大堆，从最后一个的父节点开始
+		// 没有子节点的才需要创建最大堆，从最后一个的父节点开始//data.length=14
 		int startIndex = getParentIndex(data.length - 1);
-		// 从尾端开始创建最大堆，每次都是正确的堆
+		// 从尾端开始创建最大堆，每次都是正确的堆//startIndex=6
 		for (int i = startIndex; i >= 0; i--) {
 			maxHeapify(data, data.length, i);
 		}
@@ -21,9 +23,9 @@ public class HeapSort {
 
 	/**
 	 * 创建最大堆
-	 * @paramdata
-	 * @paramheapSize需要创建最大堆的大小，一般在sort的时候用到，因为最多值放在末尾，末尾就不再归入最大堆了
-	 * @paramindex当前需要创建最大堆的位置
+	 * @param data
+	 * @param heapSize需要创建最大堆的大小，一般在sort的时候用到，因为最多值放在末尾，末尾就不再归入最大堆了
+	 * @param index当前需要创建最大堆的位置
 	 */
 	private static void maxHeapify(int[] data, int heapSize, int index) {
 		// 当前点与左右子节点比较
@@ -46,11 +48,7 @@ public class HeapSort {
 		}
 	}
 
-	/**
-	 * 排序，最大值放在末尾，data虽然是最大堆，在排序后就成了递增的
-	 * 
-	 * @paramdata
-	 */
+	// 排序，最大值放在末尾，data虽然是最大堆，在排序后就成了递增的
 	private static void heapSort(int[] data) {
 		// 末尾与头交换，交换后调整最大堆
 		for (int i = data.length - 1; i > 0; i--) {
@@ -61,37 +59,29 @@ public class HeapSort {
 		}
 	}
 
-	/**
-	 * 父节点位置
-	 * 
-	 * @paramcurrent
-	 * @return
-	 */
-	private static int getParentIndex(int current) {
-		return (current - 1) >> 1;
+	// 父节点位置
+	private static int getParentIndex(int current) {//(13-1)/2=6
+		return (current - 1) >> 1;//i的父亲为(i-1)/2.
 	}
 
-	/**
-	 * 左子节点position注意括号，加法优先级更高
-	 * 
-	 * @paramcurrent
-	 * @return
-	 */
+	// 左子节点position注意括号，加法优先级更高
 	private static int getChildLeftIndex(int current) {
-		return (current << 1) + 1;
+		return (current << 1) + 1;//i的左孩子为(2*i+1).
 	}
 
-	/**
-	 * 右子节点position
-	 * 
-	 * @paramcurrent
-	 * @return
-	 */
+	// 右子节点position
 	private static int getChildRightIndex(int current) {
-		return (current << 1) + 2;
+		return (current << 1) + 2;//i的右孩子为(2*i+2).
 	}
-
-	private static void print(int[] data) {
+	
+	public static void printArray(int[] arr){
+		for(int i=0;i!=arr.length;i++){
+			System.out.print(arr[i]+" ");
+		}
+		System.out.println();
+	}
+	
+	private static void printHeap(int[] data) {
 		int pre = -2;
 		for (int i = 0; i < data.length; i++) {
 			if (pre < (int) getLog(i + 1)) {
@@ -102,12 +92,7 @@ public class HeapSort {
 		}
 	}
 
-	/**
-	 * 以2为底的对数
-	 * 
-	 * @paramparam
-	 * @return
-	 */
+	// 以2为底的对数
 	private static double getLog(double param) {
 		return Math.log(param) / Math.log(2);
 	}
