@@ -4,10 +4,11 @@ import generic.Generic;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-
+//有个泛型generic-归并排序方法
 public class ExpressSort {
 	public static void ExpressSort(InfoNode[] arr) {
 		if (arr == null)
@@ -15,20 +16,20 @@ public class ExpressSort {
 		HashMap<Timestamp, Long> hm = new HashMap<Timestamp, Long>();
 		HashSet<Timestamp> hs = new HashSet<Timestamp>();
 		int len = arr.length;
-		InfoNode[] tempArr = new InfoNode[len];
-
-		for (int i = 0; i < len; i++) {
+		InfoNode[] tempArrHm = new InfoNode[len];
+		InfoNode[] tempArrHs = new InfoNode[len];
+		for (int i = 0; i < len; i++) {//用HashMap
 			Timestamp ts = arr[i].ts;
 			if (!hm.containsKey(ts)) {
 				hm.put(ts, arr[i].id);
-				tempArr[i] = arr[i];
+				tempArrHm[i] = arr[i];
 			}
 		}
-		for (int i = 0; i < len; i++) {
+		for (int i = 0; i < len; i++) {//用HashSet
 			Timestamp ts = arr[i].ts;
-			if (!hm.containsKey(ts)) {
-				hm.put(ts, arr[i].id);
-				tempArr[i] = arr[i];
+			if (!hs.contains(ts)) {
+				hs.add(ts);
+				tempArrHs[i] = arr[i];
 			}
 		}
 
