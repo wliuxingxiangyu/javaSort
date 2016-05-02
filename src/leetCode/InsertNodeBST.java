@@ -17,9 +17,9 @@ public class InsertNodeBST {
 			root = node;
 			return root;//此处时返回root,而不是node,因为检查结果是检查root.
 		} else if (node.val > root.val ) {//待插入节点值比root大,往右子树上插.
-			root.right = insertNode(root.right, node);
+			root.right = insertNode(root.right, node);//root.right==null判断,交给结束处理了
 			return root;
-		} else {//待插入节点值比root小,往左子树上插
+		} else {//待插入节点值比root小,往左子树上插//root.left==null判断,交给结束处理了.不用递归前判断.
 			root.left = insertNode(root.left, node);
 			return root;
 		}
