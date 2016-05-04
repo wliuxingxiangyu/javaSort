@@ -1,6 +1,6 @@
 package classTwo;
-public class FindMaxDistanceInBST {//L2P5找树中最大的节点距离:3种比较(左子树,右子树,从左到右)
-
+public class FindMaxDistanceInBST {//L2P5找树中最大的节点距离:3种比较，任意节点h(h的左子树,h的右子树,含h节点从左到右)
+//最大距离 "不一定"包含 根节点root.
 	public static class Node {
 		public int value;
 		public Node left;
