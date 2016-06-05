@@ -64,7 +64,7 @@ public class HeapSort {
 		return (current - 1) >> 1;//i的父亲为(i-1)/2.
 	}
 
-	// 左子节点position注意括号，加法优先级更高
+	// 左子节点position
 	private static int getChildLeftIndex(int current) {
 		return (current << 1) + 1;//i的左孩子为(2*i+1).
 	}

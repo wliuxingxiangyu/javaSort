@@ -2,10 +2,7 @@ package javaSort;
 
 public class SortQuick{// 相当于以中轴tmp为中心的二叉树,时间复杂度是O(nlogn)
 	public static int getMidIndex(int[] Array,int low,int high){// 返回中轴的位置
-		// 当Array[high]比中轴tmp小时,赋给Array[low]
-		// 当Array[low]比中轴tmp大时,赋给Array[high],所以 tmp为大小中轴分界点.再分别排tmp左右侧。
-		int tmp=Array[high]; // 数组的第一个作为中轴
-//		int tmp=Array[low]; // 数组的第一个作为中轴
+		int tmp=Array[low]; // 数组的第一个作为中轴
 		while(low<high){
 			while(low<high&&Array[high]>=tmp){// high大,就减,升序排列
 				System.out.println(Array[high] +"比较"+tmp);
@@ -31,7 +28,7 @@ public class SortQuick{// 相当于以中轴tmp为中心的二叉树,时间复杂度是O(nlogn)
 		}
 		if(low<high){
 			int middle=getMidIndex(Array,low,high);// 将Array数组进行一分为二
-			fastSort(Array,low,middle-1);// 对低字表进行递归排序 //中轴分界点-1
+			fastSort(Array,low,middle);// 对低字表进行递归排序 //中轴分界点-1
 			fastSort(Array,middle+1,high);// 对高字表进行递归排序//中轴分界点+1
 		}
 	}
@@ -44,8 +41,8 @@ public class SortQuick{// 相当于以中轴tmp为中心的二叉树,时间复杂度是O(nlogn)
 	}
 
 	public static void main(String[] args){
-		int[] Array={3, 2, 5, 7, 6, 8};
-//		int[] Array={49, 38, 65, 97, 76, 13, 27, 49};
+//		int[] Array={3, 2, 5, 7, 6, 8};
+		int[] Array={4,5,1,2,3};
 		// int[] Array={1,8,5,7,9,2,4,6,8};
 		System.out.print("排序前的数组");
 		printArray(Array);

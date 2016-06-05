@@ -73,17 +73,23 @@ public class SerializeBinaryTreeAndReconstruct{//L2P26序列化，插入特殊字符，
 		head.right=new BinaryTreeNode(4);
 		head.right.left=new BinaryTreeNode(5);
 		head.right.right=new BinaryTreeNode(6);
+		System.out.println("====即将序列化：========");
 		String result=serializeTree(head);
 		System.out.println(result);
-		System.out.println("=======================");
+		System.out.println("即将printTreePreOrder：");
 		printTreePreOrder(head);
 		System.out.println();
+		System.out.println("即将printInOrder：");
 		printInOrder(head);
 		System.out.println();
+		System.out.println();//空一行
 		System.out.println("=======================");
+		System.out.println("====即将   反序列化：========");
 		BinaryTreeNode newTree=reConstructTree(result);
+		System.out.println("即将printTreePreOrder：");
 		printTreePreOrder(newTree);
 		System.out.println();
+		System.out.println("即将printInOrder：");
 		printInOrder(newTree);
 		System.out.println();
 	}
