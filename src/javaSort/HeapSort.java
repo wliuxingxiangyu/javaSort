@@ -1,15 +1,15 @@
 package javaSort;
 
 public class HeapSort {
-	private static int[] sort = new int[] { 1, 0, 10, 20, 3, 5, 6, 4, 9, 8, 12,
-			17, 34, 11 };
-
 	public static void main(String[] args) {
+		int[] sort = new int[] { 1, 0, 2, 3, 5, 6, 4, 9, 8 };
 		printArray(sort);
 		System.out.println("即将堆排序。。");
-		buildMaxHeapify(sort);//建大根堆
-		heapSort(sort);
+		buildMaxHeapify(sort);// 1.建大根堆
+		heapSort(sort);// 2.堆排序
 		printHeap(sort);
+		System.out.println("排序后的数组：");
+		printArray(sort);
 	}
 
 	private static void buildMaxHeapify(int[] data) {
@@ -22,10 +22,8 @@ public class HeapSort {
 	}
 
 	/**
-	 * 创建最大堆
-	 * @param data
-	 * @param heapSize需要创建最大堆的大小，一般在sort的时候用到，因为最多值放在末尾，末尾就不再归入最大堆了
-	 * @param index当前需要创建最大堆的位置
+	 * 创建最大堆 heapSize需要创建最大堆的大小,一般在sort的时候用到,因为最多值放在末尾,末尾就不再归入最大堆了
+	 * index当前需要创建最大堆的位置
 	 */
 	private static void maxHeapify(int[] data, int heapSize, int index) {
 		// 当前点与左右子节点比较
@@ -41,9 +39,7 @@ public class HeapSort {
 		}
 		// 得到最大值后可能需要交换，如果交换了，其子节点可能就不是最大堆了，需要重新调整
 		if (largest != index) {
-			int temp = data[index];
-			data[index] = data[largest];
-			data[largest] = temp;
+			swap(data,largest,index);
 			maxHeapify(data, heapSize, largest);
 		}
 	}
@@ -52,35 +48,40 @@ public class HeapSort {
 	private static void heapSort(int[] data) {
 		// 末尾与头交换，交换后调整最大堆
 		for (int i = data.length - 1; i > 0; i--) {
-			int temp = data[0];
-			data[0] = data[i];
-			data[i] = temp;
+			swap(data,0,i);
 			maxHeapify(data, i, 0);
 		}
 	}
 
+	public static void swap(int[] a, int i, int j) {
+		int tmp;
+		tmp = a[i];
+		a[i] = a[j];
+		a[j] = tmp;
+	}
+
 	// 父节点位置
-	private static int getParentIndex(int current) {//(13-1)/2=6
-		return (current - 1) >> 1;//i的父亲为(i-1)/2.
+	private static int getParentIndex(int current) {// (13-1)/2=6
+		return (current - 1) >> 1;// i的父亲为(i-1)/2.
 	}
 
 	// 左子节点position
 	private static int getChildLeftIndex(int current) {
-		return (current << 1) + 1;//i的左孩子为(2*i+1).
+		return (current << 1) + 1;// i的左孩子为(2*i+1).本来是2i,因为编程时从1开始数.
 	}
 
 	// 右子节点position
 	private static int getChildRightIndex(int current) {
-		return (current << 1) + 2;//i的右孩子为(2*i+2).
+		return (current << 1) + 2;// i的右孩子为(2*i+2).
 	}
-	
-	public static void printArray(int[] arr){
-		for(int i=0;i!=arr.length;i++){
-			System.out.print(arr[i]+" ");
+
+	public static void printArray(int[] arr) {
+		for (int i = 0; i != arr.length; i++) {
+			System.out.print(arr[i] + " ");
 		}
 		System.out.println();
 	}
-	
+
 	private static void printHeap(int[] data) {
 		int pre = -2;
 		for (int i = 0; i < data.length; i++) {
