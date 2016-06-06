@@ -2,7 +2,7 @@ package javaSort;
 
 public class HeapSort {
 	public static void main(String[] args) {
-		int[] sort = new int[] { 1, 0, 2, 3, 5, 6, 4, 9, 8 };
+		int[] sort = new int[] { 1, 0, 2, 8, 5, 6, 4, 9, 3 };
 		printArray(sort);
 		System.out.println("即将堆排序。。");
 		buildMaxHeapify(sort);// 1.建大根堆
@@ -12,44 +12,44 @@ public class HeapSort {
 		printArray(sort);
 	}
 
-	private static void buildMaxHeapify(int[] data) {
-		// 没有子节点的才需要创建最大堆，从最后一个的父节点开始//data.length=14
-		int startIndex = getParentIndex(data.length - 1);
+	private static void buildMaxHeapify(int[] arr) {
+		// 没有子节点的才需要创建最大堆，从最后一个的父节点开始//arr.length=14
+		int startIndex = arr.length/2 - 1;//从中间元素开始建堆，
 		// 从尾端开始创建最大堆，每次都是正确的堆//startIndex=6
 		for (int i = startIndex; i >= 0; i--) {
-			maxHeapify(data, data.length, i);
+			maxHeapify(arr, arr.length, i);
 		}
 	}
 
 	/**
-	 * 创建最大堆 heapSize需要创建最大堆的大小,一般在sort的时候用到,因为最多值放在末尾,末尾就不再归入最大堆了
-	 * index当前需要创建最大堆的位置
+	 * 创建最大堆 heapSize需要创建最大堆的大小,因为最多值放在末尾,末尾就不再归入最大堆了
+	 * index当前需要创建最大堆的位置，最大堆排序后，是升序排列
 	 */
-	private static void maxHeapify(int[] data, int heapSize, int index) {
-		// 当前点与左右子节点比较
-		int left = getChildLeftIndex(index);
-		int right = getChildRightIndex(index);
+	private static void maxHeapify(int[] arr, int heapSize, int index) {
+		// 当前点与左右子节点比较// i的左孩子为(2*i+1).本来是2i,因为编程时从1开始数.
+		int left = (index << 1) + 1;
+		int right = (index << 1) + 2;
 
 		int largest = index;
-		if (left < heapSize && data[index] < data[left]) {
+		if (left < heapSize && arr[index] < arr[left]) {
 			largest = left;
 		}
-		if (right < heapSize && data[largest] < data[right]) {
+		if (right < heapSize && arr[largest] < arr[right]) {
 			largest = right;
 		}
 		// 得到最大值后可能需要交换，如果交换了，其子节点可能就不是最大堆了，需要重新调整
 		if (largest != index) {
-			swap(data,largest,index);
-			maxHeapify(data, heapSize, largest);
+			swap(arr,largest,index);
+			maxHeapify(arr, heapSize, largest);
 		}
 	}
 
-	// 排序，最大值放在末尾，data虽然是最大堆，在排序后就成了递增的
-	private static void heapSort(int[] data) {
+	// 排序，最大值放在末尾，arr虽然是最大堆，在排序后就成了递增的
+	private static void heapSort(int[] arr) {
 		// 末尾与头交换，交换后调整最大堆
-		for (int i = data.length - 1; i > 0; i--) {
-			swap(data,0,i);
-			maxHeapify(data, i, 0);
+		for (int i = arr.length - 1; i > 0; i--) {
+			swap(arr,0,i);
+			maxHeapify(arr, i, 0);
 		}
 	}
 
@@ -60,21 +60,6 @@ public class HeapSort {
 		a[j] = tmp;
 	}
 
-	// 父节点位置
-	private static int getParentIndex(int current) {// (13-1)/2=6
-		return (current - 1) >> 1;// i的父亲为(i-1)/2.
-	}
-
-	// 左子节点position
-	private static int getChildLeftIndex(int current) {
-		return (current << 1) + 1;// i的左孩子为(2*i+1).本来是2i,因为编程时从1开始数.
-	}
-
-	// 右子节点position
-	private static int getChildRightIndex(int current) {
-		return (current << 1) + 2;// i的右孩子为(2*i+2).
-	}
-
 	public static void printArray(int[] arr) {
 		for (int i = 0; i != arr.length; i++) {
 			System.out.print(arr[i] + " ");
@@ -82,14 +67,14 @@ public class HeapSort {
 		System.out.println();
 	}
 
-	private static void printHeap(int[] data) {
+	private static void printHeap(int[] arr) {
 		int pre = -2;
-		for (int i = 0; i < data.length; i++) {
+		for (int i = 0; i < arr.length; i++) {
 			if (pre < (int) getLog(i + 1)) {
 				pre = (int) getLog(i + 1);
 				System.out.println();
 			}
-			System.out.print(data[i] + "|");
+			System.out.print(arr[i] + "|");
 		}
 	}
 
