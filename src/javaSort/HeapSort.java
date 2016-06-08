@@ -2,7 +2,7 @@ package javaSort;
 
 public class HeapSort {
 	public static void main(String[] args) {
-		int[] sort = new int[] { 1, 0, 2, 8, 5, 6, 4, 9, 3 };
+		int[] sort = new int[] { 4,2,5,1,3 };
 		printArray(sort);
 		System.out.println("即将堆排序。。");
 		buildMaxHeapify(sort);// 1.建大根堆
@@ -13,7 +13,7 @@ public class HeapSort {
 	}
 
 	private static void buildMaxHeapify(int[] arr) {
-		// 没有子节点的才需要创建最大堆，从最后一个的父节点开始//arr.length=14
+		// 没有子节点的才需要创建最大堆，从最后一个的父节点开始//arr.length=5
 		int startIndex = arr.length/2 - 1;//从中间元素开始建堆，
 		// 从尾端开始创建最大堆，每次都是正确的堆//startIndex=6
 		for (int i = startIndex; i >= 0; i--) {
