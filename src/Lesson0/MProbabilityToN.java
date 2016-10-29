@@ -22,7 +22,7 @@ public class MProbabilityToN {
 		}
 
 		for (int i = 0; i < res.length; i++) {
-			System.out.print(res[i]+" ");
+			System.out.print(res[i] + " ");
 		}
 		return res; // res={000...11}
 	}
@@ -55,9 +55,9 @@ public class MProbabilityToN {
 		}
 		return true;
 	}
-	
+
 	public static void printArray(int[] Array) {
-		System.out.println( );
+		System.out.println();
 		System.out.println("数组如下：");
 		for (int i = 0; i < Array.length; i++) {
 			System.out.print(Array[i] + "  ");
