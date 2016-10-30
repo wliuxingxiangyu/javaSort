@@ -1,5 +1,7 @@
 package leetCode;
-
+/**排列组合
+ * 1.交换数组第一个元素buf[start]与后续的元素buf[i],2.进入全排列，3.再换回来buf[start]与buf[i]。
+ */
 public class L020113PermutationSequenceKth {
 	public static int count = 0;// 计数
 	public static StringBuffer sBuf = new StringBuffer();
