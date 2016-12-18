@@ -1,5 +1,6 @@
 package javaSort;
 
+//启动线程时一定要start()，而不是run().
 public class Threadrun {
 	public static void main(String[] args){
 		Thread t=new Thread(){

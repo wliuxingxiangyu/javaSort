@@ -7,17 +7,17 @@ public class HeapSortSimple {
 		return i;
 	}
 
-	private static <AnyType extends Comparable<? super AnyType>> void percDown(
-			AnyType[] a, int i, int n) {
+	private static void percDown(
+			int[] a, int i, int n) {
 		int child = 0;
-		AnyType tmp;
+		int tmp;
 		for (tmp = a[i]; leftChild(i) < n; i = child) {
 			child = leftChild(i);
-			if (child != n - 1 && a[child].compareTo(a[child + 1]) < 0) {
+			if (child != n - 1 && a[child]<a[child + 1]) {
 				child++;
 			}
 
-			if (tmp.compareTo(a[child]) < 0) {
+			if (tmp<a[child]) {
 				a[i] = a[child];
 			} else {
 				break;
@@ -26,8 +26,8 @@ public class HeapSortSimple {
 		a[i] = tmp;
 	}
 
-	public static <AnyType extends Comparable<? super AnyType>> void heapsort(
-			AnyType[] a) {
+	public static void heapsort(
+			int[] a) {
 		for (int i = a.length / 2; i >= 0; i--) {
 			percDown(a, i, a.length);
 		}
@@ -38,18 +38,18 @@ public class HeapSortSimple {
 		}
 	}
 
-	public static <AnyType extends Comparable<? super AnyType>> void swap(
-			AnyType[] a, int i, int j) {
-		AnyType tmp;
+	public static void swap(
+			int[] a, int i, int j) {
+		int tmp;
 		tmp = a[i];
 		a[i] = a[j];
 		a[j] = tmp;
 	}
 
-	private static int[] sort = new int[] { 1, 0, 10, 20, 3, 5, 6, 4, 9, 8, 12,
-			17, 34, 11 };
 
 	public static void main(String[] args) {
+		int[] sort = new int[] { 1, 0, 10, 20, 3, 5, 6, 4, 9, 8, 12,
+				17, 34, 11 };
 		printArray(sort);
 		System.out.println("¼´½«¶ÑÅÅÐò¡£¡£");
 		heapsort(sort);
