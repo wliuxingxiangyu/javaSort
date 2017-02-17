@@ -3,7 +3,7 @@ package javaSort;
 public class AllArrangement{// 全排列
 	public static int count=0;// 计数
 	public static void main(String[] args){
-		char buf[]={'a', 'b', 'c'};
+		char buf[]={'a', 'b', 'c','d'};
 		perm(buf,0,buf.length-1);
 	}
 
@@ -12,8 +12,8 @@ public class AllArrangement{// 全排列
 			System.out.print(++count+".");// 计数1.2.3..
 			PrintArr(buf);
 		}else{// 多个字母全排列,循环中交换,递归交换,
-			for(int i=start;i<=end;i++){//该for循环为了交换start和i
-				swap(buf,start,i);//第一次i=start换与没换一样.
+			for(int i=start;i<=end;i++){//该for循环为了交换start和i(即b和中间的cd依次交换)作为起始字母.
+				swap(buf,start,i);//第一次i=start换与没换一样.因为有abcd,bcd,cd,d原始顺序的组合。
 				perm(buf,start+1,end);//start+1后续元素递归全排列.
 				swap(buf,start,i);// 将交换后的数组还原.
 			}
