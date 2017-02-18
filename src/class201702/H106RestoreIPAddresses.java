@@ -22,22 +22,20 @@ public class H106RestoreIPAddresses {
 	}
 
 	private static void dfs(List<String> res, String s, String path, int total) {
-		if ((total == 1) && isValid(s)) {
-			res.add(path + s);//还剩最后一个，且是有效子IP，加入。
-			return;
-		} else {
-			for (int i = 1, nLen = Math.min(4, s.length()); i < nLen; i++) {
+		if (total == 1) {// 终止条件，到了叶子节点
+			if (isValid(s))// 收敛条件，找到了一个可行解
+				res.add(path + s);
+		} else {//total=4,3,2进else;所以if不能这样写“终止条件&&收敛条件”。因为会让isValid(s)==false进else.
+			for (int i = 1, nLen = Math.min(4, s.length()); i < nLen; i++) {//4是因为s.substring(0,i)最大3位的255.
 				String midPart = s.substring(0, i);// 取后面部分的前i个，s.substring(k).substring(0,i)
 				if (isValid(midPart)) {
-
 					System.out.println((line++) + "行,i=" + i + ",path=" + path
 							+ ",midPart=" + midPart + ",(total - 1)="
-							+ (total - 1));
+							+ (total - 1)+",s.substring(i)="+s.substring(i));
 
 					dfs(res, s.substring(i), path + midPart + ".", total - 1);
-					//dfs一般形参：输出值，输入值，满足条件加在路径后面，限制收敛条件的参数。
 				}
-			}// end for
+			}
 		}
 	}
 
