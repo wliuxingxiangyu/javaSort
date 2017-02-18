@@ -1,6 +1,7 @@
 package class201702;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class H106RestoreIPAddresses {
 	/**
@@ -12,41 +13,40 @@ public class H106RestoreIPAddresses {
 	 */
 	static int line = 0;
 
-	public static boolean isValid(String s) {
-		if (s.charAt(0) == '0')
-			return s.equals("0");// 不能包括01 001这样的格式，但可以0.0.1
-		int num = Integer.parseInt(s);
-		return num <= 255 && num > 0;
-	}
-
-	public static void dfs(String s, String prePart, ArrayList<String> res,
-			int subIPsize) {
-		if (subIPsize > 4) {
-			return;
-		}
-		if (subIPsize == 3 && isValid(s)) {// 前面已经有3部分,如果这个满足即4个subIP成为有效IP,可以返回.
-			res.add(prePart + s);// 前面部分（包括中间部分）+后面部分
-			return;
-		}
-		for (int i = 1; i < 4 && i < s.length(); i++) {// s.substring(i)至少倒数后面有4个字符串，
-			String midPart = s.substring(0, i);// 取后面部分的前i个，s.substring(k).substring(0,i)
-												// 下标为0～(i-1)的子串
-			if (isValid(midPart)) {
-				System.out.println((line++) + "行,i=" + i + "-s.substring(i)="
-						+ s.substring(i) + "-prePart=" + prePart + "-midPart="
-						+ midPart + "-res=" + res + "-(subIPsize+1) ="
-						+ (subIPsize + 1));
-				dfs(s.substring(i), prePart + midPart + '.', res, subIPsize + 1);
-			}// 下标i到最后的字符子串，
-		}// end for
-	}
-
-	public static ArrayList<String> restoreIpAddresses(String s) {
-		ArrayList<String> res = new ArrayList<String>();
-		if (s.length() < 4 || s.length() > 12)
+	public static List<String> restoreIpAddresses(String s) {
+		List<String> res = new ArrayList<String>();
+		if (s == null || s.length() < 4)
 			return res;
-		dfs(s, "", res, 0);
+		dfs(res, s, "", 4);
 		return res;
+	}
+
+	private static void dfs(List<String> res, String s, String path, int total) {
+		if ((total == 1) && isValid(s)) {
+			res.add(path + s);//还剩最后一个，且是有效子IP，加入。
+			return;
+		} else {
+			for (int i = 1, nLen = Math.min(4, s.length()); i < nLen; i++) {
+				String midPart = s.substring(0, i);// 取后面部分的前i个，s.substring(k).substring(0,i)
+				if (isValid(midPart)) {
+
+					System.out.println((line++) + "行,i=" + i + ",path=" + path
+							+ ",midPart=" + midPart + ",(total - 1)="
+							+ (total - 1));
+
+					dfs(res, s.substring(i), path + midPart + ".", total - 1);
+				}
+			}// end for
+		}
+	}
+
+	private static boolean isValid(String s) {
+		if (s.length() == 1)
+			return true;
+		if (s.length() >= 4)
+			return false;
+		int num = Integer.parseInt(s);
+		return s.charAt(0) != '0' && num > 0 && num <= 255;
 	}
 
 	public static void main(String[] args) {
