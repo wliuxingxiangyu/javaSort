@@ -35,6 +35,7 @@ public class H106RestoreIPAddresses {
 							+ (total - 1));
 
 					dfs(res, s.substring(i), path + midPart + ".", total - 1);
+					//dfs一般形参：输出值，输入值，满足条件加在路径后面，限制收敛条件的参数。
 				}
 			}// end for
 		}
